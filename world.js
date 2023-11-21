@@ -10,16 +10,33 @@ document.addEventListener('DOMContentLoaded', function () {
     function fetchData(lookupType) {
         var country = document.getElementById('country').value;
         fetch(`http://localhost/info2180-lab5/world.php?country=${country}&lookup=${lookupType}`)
-            .then(response => response.text()) // Change to text() instead of json()
-            .then(data => displayResults(data, lookupType)) // Pass data directly to displayResults
-            .catch(error => console.error('Error:', error));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                if (lookupType === 'country' && response.headers.get('content-type').startsWith('text/html')) {
+                    return response.text();
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => displayResults(data, lookupType))
+            .catch(error => {
+                console.error('Error:', error);
+                displayError('An error occurred while fetching data.');
+            });
+    }
+
+    function displayError(message) {
+        var resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = '<p>' + message + '</p>';
     }
 
     function displayResults(results, lookupType) {
         var resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = results; 
+        resultDiv.innerHTML = '';
 
-        if (results.length > 0 && results[0].cityName) {
+        if (lookupType === 'cities') {
             var table = document.createElement('table');
             table.classList.add('city-table');
 
@@ -37,19 +54,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     cell.textContent = row[key];
                 }
             });
-
             resultDiv.appendChild(table);
-        } else {
-            var ul = document.createElement('ul');
-            ul.classList.add('country-list');
-
-            results.forEach(function (row) {
-                var li = document.createElement('li');
-                li.textContent = row.name + ' is ruled by ' + row.head_of_state;
-                ul.appendChild(li);
-            });
-
-            resultDiv.appendChild(ul);
+        } else if (lookupType === 'country') {
+            resultDiv.innerHTML = results;
         }
     }
 });
