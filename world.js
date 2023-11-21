@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function fetchData(lookupType) {
         var country = document.getElementById('country').value;
         fetch(`http://localhost/info2180-lab5/world.php?country=${country}&lookup=${lookupType}`)
-            .then(response => response.json())
-            .then(data => displayResults(data, lookupType))
+            .then(response => response.text()) // Change to text() instead of json()
+            .then(data => displayResults(data, lookupType)) // Pass data directly to displayResults
             .catch(error => console.error('Error:', error));
     }
 
     function displayResults(results, lookupType) {
         var resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = '';
+        resultDiv.innerHTML = results; 
 
         if (results.length > 0 && results[0].cityName) {
             var table = document.createElement('table');
