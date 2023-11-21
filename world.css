@@ -3,15 +3,29 @@ body {
 }
 
 header {
-    background-color: #009688;
+    background-color: #009688; /* Emerald Green */
     color: #fff;
     padding: 10px;
     text-align: center;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: url('map-of-the-world-in-cool-blue-watercolor-irina-sztukowski.jpg') no-repeat center center;
+    background-size: cover;
 }
 
 main {
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Light gray background */
     padding: 20px;
+    text-align: center;
 }
 
 #controls {
@@ -31,9 +45,15 @@ button {
 }
 
 button:hover {
-    background-color: #00796b; 
+    background-color: #00796b; /* Darker shade of emerald green on hover */
+}
+/* 
+#result {
 }
 
-#result {
-    /* Result container styles can be added based on your preference */
+.city-table {
 }
+
+.country-list {
+}
+*/
