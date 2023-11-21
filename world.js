@@ -12,9 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'world.php?country=' + country + '&lookup=' + lookupType, true);
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                var response = JSON.parse(xhr.responseText);
-                displayResults(response, lookupType);
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    displayResults(response, lookupType);
+                } else {
+                    console.error('Request failed with status:', xhr.status);
+                }
             }
         };
         xhr.send();

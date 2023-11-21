@@ -16,7 +16,7 @@ if (isset($_GET['country'])) {
     if (isset($_GET['lookup']) && $_GET['lookup'] === 'cities') {
         $stmt = $conn->query("SELECT cities.name AS cityName, cities.district, cities.population
                             FROM cities
-                            JOIN countries ON cities.countrycode = countries.code
+                            JOIN countries ON cities.country_code = countries.code
                             WHERE countries.name LIKE '%$country%'");
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
