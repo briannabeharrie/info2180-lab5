@@ -9,19 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function fetchData(lookupType) {
         var country = document.getElementById('country').value;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'world.php?country=' + country + '&lookup=' + lookupType, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    displayResults(response, lookupType);
-                } else {
-                    console.error('Request failed with status:', xhr.status);
-                }
-            }
-        };
-        xhr.send();
+        fetch(`http://localhost/info2180-lab5/world.php?country=${country}&lookup=${lookupType}`)
+            .then(response => response.json())
+            .then(data => displayResults(data, lookupType))
+            .catch(error => console.error('Error:', error));
     }
 
     function displayResults(results, lookupType) {
