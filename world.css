@@ -1,1 +1,39 @@
-/* Add your own styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #009688;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+#controls {
+    margin-bottom: 20px;
+}
+
+#country {
+    padding: 5px;
+}
+
+button {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #009688;
+    color: #fff;
+    border: none;
+}
+
+button:hover {
+    background-color: #00796b; 
+}
+
+#result {
+    /* Result container styles can be added based on your preference */
+}
