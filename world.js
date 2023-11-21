@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function () {
         var resultDiv = document.getElementById('result');
         resultDiv.innerHTML = '';
 
-        if (results.length > 0 && results[0].cityName) {
+        if (results.length > 0 && results[0].CityName) {
             var table = document.createElement('table');
             table.classList.add('city-table');
 
             var headerRow = table.insertRow(0);
             for (var key in results[0]) {
                 var th = document.createElement('th');
-                th.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+                th.textContent = key.replace(/_/g, ' ').charAt(0).toUpperCase() + key.slice(1);
                 headerRow.appendChild(th);
             }
 
