@@ -21,7 +21,22 @@ if (isset($_GET['country'])) {
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    header('Content-Type: application/json');
-    echo json_encode($results);
+
+    if ($_GET['lookup'] === 'country') {
+        echo '<table border="1">';
+        echo '<tr><th>Country Name</th><th>Continent</th><th>Independence Year</th><th>Head of State</th></tr>';
+        foreach ($results as $row) {
+            echo '<tr>';
+            echo '<td>' . $row['name'] . '</td>';
+            echo '<td>' . $row['continent'] . '</td>';
+            echo '<td>' . $row['independence_year'] . '</td>';
+            echo '<td>' . $row['head_of_state'] . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode($results);
+    }
 }
 ?>
